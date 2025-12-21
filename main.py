@@ -1,7 +1,7 @@
 tasks = []
 
 while True:
-    user_action = input("Type add, show, edit or exit: ")
+    user_action = input("Type add, show, edit, complete or exit: ")
 
     match user_action.strip():
         
@@ -10,10 +10,8 @@ while True:
             tasks.append(todo)
 
         case "show":
-            number = 1
-            for item in tasks:
-                print(f"{number}. {item.title()}")
-                number = number + 1
+            for index, item in enumerate(tasks):
+                print(f"{index + 1}. {item.title()}")
 
         case "edit":
             stringifiedNumber = input("Number of the task to edit: ")
@@ -21,6 +19,12 @@ while True:
             newTask = input("Enter new task: ")
             tasks[number - 1] = newTask
             print("Task Updated!")
+
+        case "complete":
+            stringifiedNumber = input("Number of the task to mark as complete: ")
+            number = int(stringifiedNumber)
+            completedTask = tasks.pop(number - 1)
+            print(f"Task marked as completed: {completedTask}")
 
         case "exit":
             break
