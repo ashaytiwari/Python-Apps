@@ -1,5 +1,3 @@
-tasks = []
-
 while True:
     user_action = input("Type add, show, edit, complete or exit: ")
 
@@ -19,6 +17,11 @@ while True:
             file.close()
 
         case "show":
+            
+            file = open('tasks.txt', 'r')
+            tasks = file.readlines()
+            file.close()
+
             for index, item in enumerate(tasks):
                 print(f"{index + 1}. {item.title()}")
 
