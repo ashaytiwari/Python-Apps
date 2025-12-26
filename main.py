@@ -6,22 +6,19 @@ while True:
         case "add":
             todo = input("Enter Task: ") + '\n' # \n for new line escape character
 
-            file = open('tasks.txt', 'r')
-            tasks = file.readlines()
-            file.close()
+            with open('tasks.txt', 'r') as file:
+                tasks = file.readlines()
 
             tasks.append(todo)
 
-            file = open('tasks.txt', 'w')
-            file.writelines(tasks)
-            file.close()
+            with open('tasks.txt', 'w') as file:
+                file.writelines(tasks)
 
         case "show":
             
-            file = open('tasks.txt', 'r')
-            tasks = file.readlines()
-            file.close()
-
+            with open('tasks.txt', 'r') as file:
+                tasks = file.readlines()
+                
             # list comprehension: to modify the list of items
             # newTasks = [item.strip('\n') for item in tasks]
 
