@@ -1,11 +1,11 @@
 password = input('Enter Password: ')
 
-results = []
+results = {}
 
 if len(password) > 8:
-    results.append(True)
+    results["length"] = True
 else:
-    results.append(False)
+    results["length"] = False
 
 contains_digit = False
 
@@ -14,7 +14,7 @@ for i in password:
         contains_digit = True
         break
     
-results.append(contains_digit)
+results["digit"] = contains_digit
 
 contains_uppercase_char = False
 
@@ -23,9 +23,11 @@ for i in password:
         contains_uppercase_char = True
         break
     
-results.append(contains_uppercase_char)
+results["uppercase"] = contains_uppercase_char
 
-if all(results):
+print(results, results.keys(), results.values())
+
+if all(results.values()):
     print("Strong Password")
 else:
     print("Weak Password")
