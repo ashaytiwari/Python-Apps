@@ -22,8 +22,14 @@ while True:
             tasks = file.readlines()
             file.close()
 
+            # list comprehension: to modify the list of items
+            # newTasks = [item.strip('\n') for item in tasks]
+
             for index, item in enumerate(tasks):
-                print(f"{index + 1}. {item.title()}")
+                # more direct way to remove \n from item rather than above
+                item = item.title().strip('\n')
+
+                print(f"{index + 1}. {item}") 
 
         case "edit":
             stringifiedNumber = input("Number of the task to edit: ")
