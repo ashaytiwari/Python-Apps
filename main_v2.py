@@ -32,35 +32,48 @@ while True:
 
     elif user_action == "edit":
             
-        stringifiedNumber = input("Number of the task to edit: ")
-        number = int(stringifiedNumber)
+        try:
+            stringifiedNumber = input("Number of the task to edit: ")
+            number = int(stringifiedNumber)
 
-        newTask = input("Enter new task: ") + '\n' # \n for new line escape character
+            newTask = input("Enter new task: ") + '\n' # \n for new line escape character
 
-        with open('tasks.txt', 'r') as file:
-            tasks = file.readlines()
+            with open('tasks.txt', 'r') as file:
+                tasks = file.readlines()
 
-        tasks[number - 1] = newTask
+            tasks[number - 1] = newTask
 
-        with open('tasks.txt', 'w') as file:
-            file.writelines(tasks)
+            with open('tasks.txt', 'w') as file:
+                file.writelines(tasks)
 
-        print("Task Updated!")
+            print("Task Updated!")
+
+        except ValueError:
+            print('Invalid Value!')
+            continue
 
     elif user_action == "complete":
         
-        stringifiedNumber = input("Number of the task to mark as complete: ")
-        number = int(stringifiedNumber)
+        try:
+            stringifiedNumber = input("Number of the task to mark as complete: ")
+            number = int(stringifiedNumber)
 
-        with open('tasks.txt', 'r') as file:
-            tasks = file.readlines()
+            with open('tasks.txt', 'r') as file:
+                tasks = file.readlines()
 
-        completedTask = tasks.pop(number - 1)
+            completedTask = tasks.pop(number - 1)
 
-        with open('tasks.txt', 'w') as file:
-            file.writelines(tasks)
+            with open('tasks.txt', 'w') as file:
+                file.writelines(tasks)
 
-        print(f"Task marked as completed: {completedTask.strip('\n')}")
+            print(f"Task marked as completed: {completedTask.strip('\n')}")
+
+        except IndexError:
+            print("Task with this index doesn't exists!")
+            continue
+        except ValueError:
+            print('Invalid Value!')
+            continue
 
     elif user_action == "exit":
         print('Bye, See you soon!')
