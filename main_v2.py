@@ -1,10 +1,15 @@
-def get_tasks():
+def get_tasks(filepath):
     
-    with open('tasks.txt', 'r') as file_local:
+    with open(filepath, 'r') as file_local:
         tasks_local = file_local.readlines()
 
     return tasks_local
 
+
+def write_tasks(filepath, data):
+    
+    with open(filepath, 'w') as file_local:
+        file_local.writelines(data)
 
 while True:
     user_action = input("Type add, add-many, show, edit, complete or exit: ")
@@ -17,16 +22,15 @@ while True:
         if todo == '':
             todo = input("Enter Task: ")
 
-        tasks = get_tasks()
+        tasks = get_tasks('tasks.txt')
 
         tasks.append(todo + '\n')
 
-        with open('tasks.txt', 'w') as file:
-            file.writelines(tasks)
+        write_tasks('tasks.txt', tasks)
 
     elif user_action == 'show':
             
-        tasks = get_tasks()
+        tasks = get_tasks('tasks.txt')
             
         # list comprehension: to modify the list of items
         # newTasks = [item.strip('\n') for item in tasks]
@@ -44,12 +48,11 @@ while True:
 
             newTask = input("Enter new task: ") + '\n' # \n for new line escape character
 
-            tasks = get_tasks()
+            tasks = get_tasks('tasks.txt')
 
             tasks[number - 1] = newTask
 
-            with open('tasks.txt', 'w') as file:
-                file.writelines(tasks)
+            write_tasks('tasks.txt', tasks)
 
             print("Task Updated!")
 
@@ -63,12 +66,11 @@ while True:
             stringifiedNumber = input("Number of the task to mark as complete: ")
             number = int(stringifiedNumber)
 
-            tasks = get_tasks()
+            tasks = get_tasks('tasks.txt')
 
             completedTask = tasks.pop(number - 1)
 
-            with open('tasks.txt', 'w') as file:
-                file.writelines(tasks)
+            write_tasks('tasks.txt', tasks)
 
             print(f"Task marked as completed: {completedTask.strip('\n')}")
 
