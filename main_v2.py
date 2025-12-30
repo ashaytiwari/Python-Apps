@@ -1,6 +1,11 @@
+import time
 import utilities
 
 while True:
+    
+    timestamp = time.strftime('%b %d, %Y %H:%M:%S')
+    print(f"It is {timestamp}")
+
     user_action = input("Type add, add-many, show, edit, complete or exit: ")
 
     if user_action.startswith("add"):
