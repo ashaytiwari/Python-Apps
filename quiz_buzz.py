@@ -8,18 +8,30 @@ with open("files/quiz_questions.json", 'r') as file:
 questions = json.loads(content)
 user_response = []
 
+""" Function to print Question Details """
+def print_questionnaire(question_local):
+    
+    print(question_local["question_text"])
+    print("Options:")
+
+    for index, option in enumerate(question_local["alternatives"]):
+        print(f"{index + 1}. {option}")
+        
+    stringified_user_input = input("Enter option number:")
+    user_input_local = int(stringified_user_input)
+
+    return user_input_local
+
+""" Main Quiz Code Block """
 try:
     for question in questions:
         
-        """ Print Question Details """
-        print(question["question_text"])
-        print("Options:")
+        user_input = print_questionnaire(question)
 
-        for index, option in enumerate(question["alternatives"]):
-            print(f"{index + 1}. {option}")
-        
-        stringified_user_input = input("Enter option number:")
-        user_input = int(stringified_user_input)
+        """ If user entered number out of the range 1-4: show Invalid Option msg and re-ask thq question"""
+        if user_input < 1 or user_input > 4:
+            print("Invalid Option!")
+            user_input = print_questionnaire(question)
 
         isCorrect = False
 
