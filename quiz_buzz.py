@@ -20,6 +20,13 @@ def print_questionnaire(question_local):
     stringified_user_input = input("Enter option number:")
     user_input_local = int(stringified_user_input)
 
+    """ If user entered number out of the range 1-4: show Invalid Option msg and re-ask thq question"""
+    if user_input_local < 1 or user_input_local > 4:
+        print("Invalid Option!")
+        
+        """ Recursively call the print_questionnaire function until user passes in range number"""
+        user_input_local = print_questionnaire(question_local)
+
     return user_input_local
 
 """ Main Quiz Code Block """
@@ -27,11 +34,6 @@ try:
     for question in questions:
         
         user_input = print_questionnaire(question)
-
-        """ If user entered number out of the range 1-4: show Invalid Option msg and re-ask thq question"""
-        if user_input < 1 or user_input > 4:
-            print("Invalid Option!")
-            user_input = print_questionnaire(question)
 
         isCorrect = False
 
