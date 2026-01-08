@@ -1,19 +1,29 @@
-import utilities
 import FreeSimpleGUI as sg
+import utilities
 
-# Define the window's contents
-layout = [  [sg.Text("What's your name?")],     # Part 2 - The Layout
-            [sg.Input()],
-            [sg.Button('Ok')] ]
+title = sg.Text("Task Manager App: Manage your Tasks easily here!", font=('Helvetica', 18))
 
-# Create the window
-window = sg.Window('Window Title', layout)      # Part 3 - Window Defintion
+label = sg.Text("Type in a Task:")
+task_input = sg.InputText(tooltip="Enter your task here", key="task")
+add_button = sg.Button("Add", key='add_action')
 
-# Display and interact with the Window
-event, values = window.read()                   # Part 4 - Event loop or Window.read call
+layout = [[title], [label], [task_input, add_button]]
+font = ('Helvetica', 16)
 
-# Do something with the information gathered
-print('Hello', values[0], "! Thanks for trying FreeSimpleGUI")
+window = sg.Window("Task Manager App", layout, font=font)
 
-# Finish up by removing from the screen
-window.close() 
+while True:
+    event, values = window.read()
+    print(event, values)
+
+    match event:
+        
+        case "add_action":
+            tasks = utilities.get_tasks('tasks.txt')
+            tasks.append(values['task'] + '\n')
+            utilities.write_tasks(filepath='tasks.txt', data=tasks)
+
+        case sg.WIN_CLOSED:
+            break
+
+window.close()
