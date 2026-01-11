@@ -18,7 +18,7 @@ def get_actual_task_text(_task):
     return task_text
 
 
-title = sg.Text("Task Manager App: Manage your Tasks easily here!", font=('Helvetica', 18))
+title = sg.Text("Task Manager App: Manage your Tasks easily here!")
 
 label = sg.Text("Type in a Task:")
 task_input = sg.InputText(tooltip="Enter your task here", key="task")
@@ -27,7 +27,7 @@ add_button = sg.Button("Add", key='add_action')
 tasks = utilities.get_tasks("tasks.txt")
 tasks_list = parse_tasks_list(tasks)
 
-edit_info_label = sg.Text("Click from the below list to edit the task.")
+edit_info_label = sg.Text("Click from the below list to edit/complete the task.")
 
 task_list_box = sg.Listbox(
     values=tasks_list, 
@@ -36,12 +36,19 @@ task_list_box = sg.Listbox(
     size=[45, 10]
     )
 edit_button = sg.Button("Edit", key='edit_action')
+complete_button = sg.Button("Complete", key='complete_action')
+exit_button = sg.Button("Exit", key='exit_action')
 
 
-layout = [[title], [label], [task_input, add_button], [edit_info_label], [task_list_box, edit_button]]
-font = ('Helvetica', 14)
+layout = [
+    [title], 
+    [label], 
+    [task_input, add_button], 
+    [edit_info_label], 
+    [task_list_box, edit_button, complete_button],
+    [exit_button]]
 
-window = sg.Window("Task Manager App", layout, font=font)
+window = sg.Window("Task Manager App", layout)
 
 while True:
     event, values = window.read()
@@ -93,6 +100,28 @@ while True:
             except:
                 print('Something went wrong, check console!')
 
+
+        case "complete_action":
+
+              try:
+                  selected_task = get_actual_task_text(values['task_lists'][0]) + '\n'
+                  all_tasks = utilities.get_tasks('tasks.txt')
+
+                  all_tasks.remove(selected_task)
+                  utilities.write_tasks(all_tasks)
+
+                  parsed_tasks_list = parse_tasks_list(all_tasks)
+
+                  """ update ui """
+                  window["task"].update(value='')
+                  window["task_lists"].update(values=parsed_tasks_list)
+
+              except:
+                print('Something went wrong, check console!')
+
+        case "exit_action":
+            break
+          
         case sg.WIN_CLOSED:
             break
 
