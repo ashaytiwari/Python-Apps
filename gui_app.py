@@ -98,7 +98,7 @@ while True:
                 window["task_lists"].update(values=parsed_tasks_list)
 
             except:
-                print('Something went wrong, check console!')
+                sg.popup('Something went wrong, check console!')
 
 
         case "complete_action":
@@ -117,7 +117,7 @@ while True:
                   window["task_lists"].update(values=parsed_tasks_list)
 
               except:
-                print('Something went wrong, check console!')
+                sg.popup('Something went wrong, check console!')
 
         case "exit_action":
             break
