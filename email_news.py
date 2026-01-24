@@ -1,9 +1,17 @@
 import requests
+from dotenv import load_dotenv
+import os
 
-url = "https://jsonplaceholder.typicode.com/posts"
+load_dotenv()
 
-request = requests.get(url)
-content = request.text
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
-print(request)
-print(content)
+print(NEWS_API_KEY)
+
+# url = "https://jsonplaceholder.typicode.com/posts"
+
+# request = requests.get(url)
+# content = request.text
+
+# print(request)
+# print(content)
