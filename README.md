@@ -94,7 +94,7 @@ A **CLI-based quiz application** that tests users with multiple-choice questions
 
 2. Navigate to the project directory:
    ```bash
-   cd python-practice-projects
+   cd Python-Apps
 
 3. Run any application using:
    ```bash
